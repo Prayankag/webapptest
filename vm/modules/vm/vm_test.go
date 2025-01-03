@@ -15,7 +15,7 @@ func GetTerraformOptions(environment string) *terraform.Options {
 
     tfvarsFile := "../environments/" + environment + "/terraform.tfvars"
     return &terraform.Options{
-        TerraformDir: "../../modules/vm", // Path to your Terraform module
+        TerraformDir: "../modules/vm", // Path to your Terraform module
         VarFiles:     []string{tfvarsFile},   // Dynamically load the correct tfvars file
     }
 }
