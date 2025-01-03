@@ -9,7 +9,7 @@ on:
       resourcetype:
         description: 'resourcetype to deploy (e.g., VM , Webapp)'
         required: true
-        default: 'VM'  # Default value for resourcetype input
+        default: 'vm'  # Default value for resourcetype input
       environment:
         description: 'Environment to deploy (e.g., dev, prod)'
         required: false
