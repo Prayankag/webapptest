@@ -32,7 +32,7 @@ jobs:
       - name: Checkout AutomationRepos
         uses: actions/checkout@v2
         with:
-          repository: ${{ github.event.inputs.orgname }}/AutomationRepos  # Replace with your automation repo name
+          repository: ${{ github.event.inputs.orgname }}/webapptest  # Replace with your automation repo name
           token: ${{ secrets.GIT_PAT }}  # Use Personal Access Token (PAT) if repository is private
           ref: main  # Make sure the main branch is specified or change if needed
 
