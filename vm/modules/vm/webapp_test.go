@@ -1,4 +1,4 @@
-package webapp
+package vm
 
 import (
     "os"
@@ -15,7 +15,7 @@ func GetTerraformOptions(environment string) *terraform.Options {
 
     tfvarsFile := "../../environments/" + environment + "/terraform.tfvars"
     return &terraform.Options{
-        TerraformDir: "../../modules/webapp", // Path to your Terraform module
+        TerraformDir: "../../modules/vm", // Path to your Terraform module
         VarFiles:     []string{tfvarsFile},   // Dynamically load the correct tfvars file
     }
 }
@@ -31,12 +31,12 @@ func ValidateTerraformPlan(t *testing.T, planOutput string, resource string) {
     assert.Contains(t, planOutput, resource, "Expected resource %s in the plan", resource)
 }
 
-// TestTerraformWebAppPlan tests the Terraform plan for a web app
-func TestTerraformWebAppPlan(t *testing.T) {
+// TestTerraformvmPlan tests the Terraform plan for a web app
+func TestTerraformvmPlan(t *testing.T) {
     env := os.Getenv("TF_VAR_ENV") // e.g., 'dev', 'stag', 'prod'
     terraformOptions := GetTerraformOptions(env)
     planOutput := InitAndPlanTerraform(t, terraformOptions)
-    ValidateTerraformPlan(t, planOutput, "azurerm_app_service")
+    ValidateTerraformPlan(t, planOutput, "azurerm_virtual_machine")
 }
 
 // TestTerraformStorageAccountPlan tests the Terraform plan for an Azure Storage Account
