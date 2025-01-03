@@ -23,16 +23,15 @@ provider "azurerm" {
 
 
 # Define the resource group
-resource "azurerm_resource_group" "example" {
+data "azurerm_resource_group" "example" {
   name     = var.resource_group_name
-  location = var.location
-}
+ }
 
 # Define the Service Plan
 resource "azurerm_service_plan" "example" {
   name                = var.app_service_plan_name
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = data.azurerm_resource_group.example.location
+  resource_group_name = data.azurerm_resource_group.example.name
 
   # Define SKU attributes directly
   sku_name            = var.sku_size  # This should be the full SKU name, like "B1", "S1", etc.
@@ -49,8 +48,8 @@ resource "random_string" "unique" {
 # Define the Web App
 resource "azurerm_app_service" "example" {
   name                = "${var.web_app_name}-${random_string.unique.result}"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = data.azurerm_resource_group.example.location
+  resource_group_name = data.azurerm_resource_group.example.name
   app_service_plan_id = azurerm_service_plan.example.id
 
   app_settings = {
